@@ -15,11 +15,11 @@ class UserDatabase
   end
 
   def find(id)
-    (@users[id - 1] or raise UserNotFoundError).dup
+    (@users[offset_id(id)] or raise UserNotFoundError).dup
   end
 
   def delete(id)
-    @users.delete_at(id - 1) or raise UserNotFoundError
+    @users.delete_at(offset_id(id)) or raise UserNotFoundError
   end
 
   def all
@@ -41,5 +41,9 @@ class UserDatabase
 
   def next_id
     @users.length + 1
+  end
+
+  def offset_id(id)
+    id - 1
   end
 end
