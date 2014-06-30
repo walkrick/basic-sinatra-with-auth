@@ -15,8 +15,10 @@ class UserDatabase
   end
 
   def find(id)
-    @users[id - 1]
+    @users[id - 1] or raise UserNotFoundError
   end
+
+  class UserNotFoundError < RuntimeError; end
 
   private
 

@@ -62,5 +62,11 @@ describe UserDatabase do
 
       expect(found_user).to include(:username => "last", :password => "password")
     end
+
+    it "raises an error if no user can be found" do
+      expect {
+        user_database.find(1)
+      }.to raise_error(UserDatabase::UserNotFoundError)
+    end
   end
 end
