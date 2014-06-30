@@ -50,7 +50,17 @@ describe UserDatabase do
 
   describe "#find" do
     it "finds the user by the id" do
+      user_database.insert(:username => "first", :password => "password")
       user_database.insert(:username => "jetaggart", :password => "password")
+      user_database.insert(:username => "last", :password => "password")
+
+      found_user = user_database.find(2)
+
+      expect(found_user).to include(:username => "jetaggart", :password => "password")
+
+      found_user = user_database.find(3)
+
+      expect(found_user).to include(:username => "last", :password => "password")
     end
   end
 end
