@@ -11,11 +11,19 @@ class UserDatabase
 
     @users.push(user)
 
-    user
+    user.dup
   end
 
   def find(id)
-    @users[id - 1] or raise UserNotFoundError
+    (@users[id - 1] or raise UserNotFoundError).dup
+  end
+
+  def delete(id)
+    @users.delete_at(id - 1) or raise UserNotFoundError
+  end
+
+  def all
+    @users.dup
   end
 
   class UserNotFoundError < RuntimeError; end

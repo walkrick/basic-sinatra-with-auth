@@ -69,4 +69,19 @@ describe UserDatabase do
       }.to raise_error(UserDatabase::UserNotFoundError)
     end
   end
+
+  describe "#delete" do
+    it "deletes at the correct id" do
+      user_database.insert(:username => "first", :password => "password")
+      user_database.delete(1)
+
+      expect(user_database.all).to eq([])
+    end
+
+    it "raises an error the an incorrect id is given" do
+      expect {
+        user_database.delete(1)
+      }.to raise_error(UserDatabase::UserNotFoundError)
+    end
+  end
 end
