@@ -26,5 +26,31 @@ describe UserDatabase do
 
       expect(second_user[:id]).to eq(2)
     end
+
+    context "validations" do
+      it "requires a username" do
+        expect {
+          user_database.insert(:password => "password")
+        }.to raise_error(ArgumentError, "username required")
+      end
+
+      it "requires a password" do
+        expect {
+          user_database.insert(:username => "username")
+        }.to raise_error(ArgumentError, "password required")
+      end
+
+      it "shows many validations" do
+        expect {
+          user_database.insert({})
+        }.to raise_error(ArgumentError, "username, password required")
+      end
+    end
+  end
+
+  describe "#find" do
+    it "finds the user by the id" do
+      user_database.insert(:username => "jetaggart", :password => "password")
+    end
   end
 end
