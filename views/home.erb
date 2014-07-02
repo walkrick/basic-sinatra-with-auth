@@ -1,0 +1,35 @@
+ <!--<% if :sessions != nil %>-->
+
+<head>
+  <link type="text/css" rel="stylesheet" href="/home.css"/>
+  <title>HEAD</title>
+
+</head>
+
+<% if flash[:notice] %>
+  <div id="message"><%= flash[:notice] %></div>
+<% end %>
+
+<a id="button" href="/registration">REGISTER</a>
+
+<p>OR</p>
+
+<form method="POST" action="/">
+  <div>
+    <label for="name">Username: </label></div>
+  <input type="text" name="name" id="name"/>
+
+  <div>
+    <label for="password">Password: </label></div>
+  <input type="password" name="password" id="password"/>
+</form>
+
+
+<a id="button_2" href="/">LOGIN</a>
+
+ <!--<% else %>-->
+
+  <div id="message2"><%= flash[:login] %></div>
+  <a id="button_2" href="/">LOGOUT</a>
+
+ <!--<% end %>-->
